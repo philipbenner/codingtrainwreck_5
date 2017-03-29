@@ -5,7 +5,8 @@ var game = {
 	ship : null,
 	shots : [],
 	aliens : [],
-	aDir : 1
+	aDir : 1,
+	state : true
 };
 
 
@@ -26,24 +27,51 @@ function setup() {
 
 function draw() {
   	background(230, 230, 250);
-  	checkKeyDown();
-  	for(var i = game.shots.length-1; i >= 0; i--){
-  		game.shots[i].show();
-  		game.shots[i].move();
-  		if (game.shots[i].testLoc() ){
-  			game.shots.splice(i, 1);
-  		}
-  		// test here for hits to aliens?
-  		//nested loop 
-  	}
-  	//
-	for (var i = game.aliens.length-1; i >= 0; i--){
-  		game.aliens[i].move();
-	  	game.aliens[i].draw();
-	}
+  	
 
-  	game.ship.show();	
-  	checkAllExtents()
+	  	
+	  	checkKeyDown(); 
+	  	
+		  	for(var i = game.shots.length-1; i >= 0; i--){
+		  		var shot = game.shots[i];
+		  		shot.show();
+		  		if(game.state){
+		  			shot.move();
+		  		}
+		  		var removeShot = false;
+		  		if (shot.testLoc() ){
+					removeShot = true;
+		  		}
+		  		// i want to revisit this to try to one line it
+		  		if(game.state){
+			  		for (var ii = game.aliens.length-1; ii >= 0; ii--){
+			  			var dis = dist(shot.x, shot.y, game.aliens[ii].x, game.aliens[ii].y);
+			  			if(dis < game.aliens[ii].r/2){
+			  				removeShot =  true;
+							game.aliens.splice(ii, 1);
+			  			}
+			  		}
+		  		}
+
+		  		if (removeShot) {
+		  			game.shots.splice(i, 1);
+		  		}
+		  		
+
+		  		// test here for hits to aliens?
+		  		//nested loop 
+		  	}
+		  	//
+			for (var i = game.aliens.length-1; i >= 0; i--){
+		  		if(game.state){
+		  			game.aliens[i].move();
+		  		}
+			  	game.aliens[i].draw();
+			}
+		
+
+	  	game.ship.show();	
+	  	checkAllExtents()
   	
 }
 
@@ -70,13 +98,23 @@ function bullet (from,to){
 
 function checkAllExtents(){
 	var change = false;
-	var fireOnce = true
 
 	for (var i = game.aliens.length-1; i >= 0; i--){
   		var check = game.aliens[i].checkExtents();
-  		if (check){
-  			change = true;
+  		//console.log(check)
+  		switch (check){
+  			case 'left':
+  			case 'right':
+	  			change = true;
+	  			break;
+  			case 'over':
+	  			//console.log('gameover')
+	  			game.state = false;
+	  			break;
   		}
+  		/*if (check){
+  			change = true;
+  		}*/
 	}
 
 	if(change){
@@ -88,6 +126,7 @@ function checkAllExtents(){
 		
 		for (var i = game.aliens.length-1; i >= 0; i--){
 			game.aliens[i].dir = game.aDir;
+			game.aliens[i].y = game.aliens[i].y +game.aliens[i].drop;
 			
 		}
 	}

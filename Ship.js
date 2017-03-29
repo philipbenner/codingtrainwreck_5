@@ -19,7 +19,6 @@ Ship.prototype.show = function () {
 	fill(0,0,255);
 	translate(this.x, this.y) ;
 	ellipse(0, 0, this.dimensions[0], this.dimensions[1]);
-	
 	//rect(0,0,this.dimensions[0],this.dimensions[1]);
 	
 	pop();

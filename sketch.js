@@ -45,7 +45,7 @@ function keyPressed (){
 }
 
 function bullet (from,to){
-	console.log('butllet',from.x , to);
-	var b = new Shot(from.x, from.y);
+	//console.log('butllet',from.x , to);
+	var b = new Shot(from.x, from.y, to);
 	game.shots.push(b);
 }

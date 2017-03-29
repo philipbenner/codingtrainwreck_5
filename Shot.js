@@ -3,6 +3,7 @@ function Shot(_x, _y, _d){
 	this.y = _y;
 	this.size = 10;
 	this.speed = 5;
+	this.dir = _d;
 
 }
 
@@ -23,5 +24,12 @@ Shot.prototype.show = function (){
 
 }
 Shot.prototype.move = function (){
-	this.y = this.y - this.speed;
+	if(this.dir == 0){
+		// ship shooting up
+		this.y = this.y - this.speed;
+	} else if(this.dir == 1){
+		// ship shooting up
+		this.y = this.y + this.speed;
+	}
+	
 }

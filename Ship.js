@@ -7,22 +7,24 @@ function Ship (_g){
 	this.game = _g;
 
 }
+
 Ship.prototype.init = function (){
 	// unused so far... 
 }
+
 Ship.prototype.show = function () {
 
 	
 	push();
-	noStroke();
-	///rectMode(CENTER); 
-	fill(0,0,255);
-	translate(this.x, this.y) ;
-	ellipse(0, 0, this.dimensions[0], this.dimensions[1]);
-	//rect(0,0,this.dimensions[0],this.dimensions[1]);
-	
+		noStroke();
+		///rectMode(CENTER); 
+		fill(0,0,255);
+		translate(this.x, this.y) ;
+		ellipse(0, 0, this.dimensions[0], this.dimensions[1]);
+		//rect(0,0,this.dimensions[0],this.dimensions[1]);	
 	pop();
 }
+
 Ship.prototype.shipEvent = function (evt){
 	switch(evt){
 		case "left":

@@ -31,7 +31,9 @@ function draw() {
 	//console.log(game.state)
   	background(230, 230, 250);
   	
-
+  	if(game.aliens.length == 0){
+  		game.state = false;
+  	}
   	
   	checkKeyDown(); 
   	

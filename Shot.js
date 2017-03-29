@@ -14,7 +14,7 @@ Shot.prototype.init = function (){
 Shot.prototype.show = function (){
 	//console.log('show')
 	push();
-		stroke(255);
+		stroke(255,0,0);
 		strokeWeight(2);
 		translate(this.x,this.y);
 		line(0,this.size,0,0);
@@ -41,8 +41,8 @@ Shot.prototype.testLoc = function (){
 		}
 	} else if(this.dir == 1){
 		// going down
-		/*if(this.y > height){
+		if(this.y > height){
 			return true;
-		}*/
+		}
 	}
 }

@@ -33,6 +33,7 @@ function draw() {
   	
   	if(game.aliens.length == 0){
   		game.state = false;
+  		alert('no aliens left')
   	}
   	
   	checkKeyDown(); 
@@ -61,6 +62,7 @@ function draw() {
   			if(dis < game.ship.dimensions[0]){
 	  				removeShot =  true;
 					game.state = false;
+					alert('you were hit')
 	  			}
   		}
   		
@@ -133,6 +135,7 @@ function checkAllExtents(){
   			case 'over':
 	  			clearInterval(game.shotInterval);
 	  			game.state = false;
+	  			alert('aliens got to far down')
 	  			break;
   		}
   		
